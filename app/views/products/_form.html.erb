@@ -5,6 +5,7 @@
     <%= f.input :owners, :as => :radio, :collection => Product::PEOPLE, label: "Who bought it?" %>
     <%= f.input :pay_list, :as => :check_boxes, :collection => Product::PEOPLE, label: "Who needs to pay?" %>
     <%= f.input :team, as: :radio, label: "For the team?" %>
+    <%= f.input :payed, as: :radio, label: "Payed?" %>
   <% end %>
   <%= f.actions do %>
     <%= f.action :submit, :as => :button %>

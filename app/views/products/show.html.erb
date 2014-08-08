@@ -24,6 +24,14 @@
   </p>
 
   <p>
+    <strong> Payed: </strong>
+    <%if @product.payed %>
+      Yes
+    <% else %>
+      No
+    <% end %>
+  </p>
+  <p>
     <strong>Who needs to pay:</strong>
       <table class="table">
         <thead>
