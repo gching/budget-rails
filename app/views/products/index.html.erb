@@ -1,9 +1,22 @@
 <h1>Listing products</h1>
-
+<br>
+<br>
+<h2>The team has spent overall <%= @team_products_sum %></h2>
+<br>
+<br>
 <% @products.each_pair do |month, products|%>
   <br>
   <h2><%= month.strftime('%B-%Y')%></h2>
-  <h3>Total of the month : <%= products.map(&:price).inject(0, :+) %></h3>
+  <h3>THIS MONTH GAVIN HAS SPENT :
+    <% gavin_sum = products.map do |product| %>
+      <% if !product.team && product.owners == "Gavin" %>
+        <% product.price %>
+      <% else %>
+        <% 0 %>
+      <% end %>
+    <% end %>
+    <%= gavin_sum.inject(0, :+) %>
+  </h3>
   <table>
     <thead>
       <tr>

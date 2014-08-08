@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all.group_by { |m| m.created_at.beginning_of_month }
-    sum_of_products
+    @team_products_sum = Product.team.sum(:price)
   end
 
   # GET /products/1
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
+    @product.pay_list.add(product_params[:owners])
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -70,7 +70,7 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :owners, :team)
+      params.require(:product).permit(:name, :price, :owners, :team, { pay_list: [] })
     end
 
     def sum_of_products

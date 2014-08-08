@@ -1,7 +1,8 @@
 class Product < ActiveRecord::Base
 
+  PEOPLE = %w(Gavin Raras)
+  acts_as_taggable_on :pay
 
-  def sum_by_month
-    
-  end
+  scope :team, where(team: true)
+  scope :not_team, where(team: false)
 end

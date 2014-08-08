@@ -32,12 +32,22 @@ gem 'jbuilder', '~> 1.2'
 ## Follow 12 factor
 gem 'rails_12factor', group: :production
 
+## Acts as taggable
+gem 'acts-as-taggable-on'
+
+## Form builder
+gem 'formtastic'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-
+group :development do
+  gem 'better_errors'
+  gem "binding_of_caller"
+  gem 'rack-mini-profiler'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
