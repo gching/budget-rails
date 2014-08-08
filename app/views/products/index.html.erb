@@ -1,0 +1,46 @@
+<h1>Listing products</h1>
+
+<% @products.each_pair do |month, products|%>
+  <br>
+  <h2><%= month.strftime('%B-%Y')%></h2>
+  <h3>Total of the month : <%= products.map(&:price).inject(0, :+) %></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Owners</th>
+        <th>Team</th>
+        <th>Month</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+          <td><%= product.owners %></td>
+          <td><%= product.team %></td>
+          <td><%= product.created_at.strftime('%B, %Y') %></td>
+          <td><%= link_to 'Show', product %></td>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+<% end %>
+
+
+<br>
+
+
+<br>
+<br>
+
+<%= link_to 'New Product', new_product_path %>
