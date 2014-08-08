@@ -1,59 +1,55 @@
-<h1>Listing products</h1>
-<br>
-<br>
-<h2>The team has spent overall <%= @team_products_sum %></h2>
-<br>
-<br>
+<div class="jumbotron">
+  <h1 class="text-center">Budgeting for us EPs!</h1>
+  <h2 class="text-center">The EP's have spent overall - JD<%= @team_products_sum %> -</h2>
+  <br>
+  <h4 class="text-center"><%= link_to "Add new item!", new_product_path, class: "btn btn-primary" %></h4>
+</div>
 <% @products.each_pair do |month, products|%>
-  <br>
-  <h2><%= month.strftime('%B-%Y')%></h2>
-  <h3>THIS MONTH GAVIN HAS SPENT :
-    <% gavin_sum = products.map do |product| %>
-      <% if !product.team && product.owners == "Gavin" %>
-        <% product.price %>
-      <% else %>
-        <% 0 %>
+  <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h2><%= month.strftime('%B, %Y')%></h2></div>
+  <div class="panel-body">
+    Gavin has spent this month - <strong>JD
+      <% gavin_sum = products.map do |product| %>
+        <% if !product.team && product.owners == "Gavin" %>
+          <% product.price %>
+        <% else %>
+          <% 0 %>
+        <% end %>
       <% end %>
-    <% end %>
-    <%= gavin_sum.inject(0, :+) %>
-  </h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Owners</th>
-        <th>Team</th>
-        <th>Month</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% products.each do |product| %>
+      <%= gavin_sum.inject(0, :+) %></strong> -
+  </div>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= product.name %></td>
-          <td><%= product.price %></td>
-          <td><%= product.owners %></td>
-          <td><%= product.team %></td>
-          <td><%= product.created_at.strftime('%B, %Y') %></td>
-          <td><%= link_to 'Show', product %></td>
-          <td><%= link_to 'Edit', edit_product_path(product) %></td>
-          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Owners</th>
+          <th>Team</th>
+          <th>Month</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <br>
+      </thead>
+      <tbody>
+        <% products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td>JD<%= product.price %></td>
+            <td><%= product.owners %></td>
+            <td><%if product.team %>
+              Yes
+            <% else %>
+              No
+            <% end %></td>
+            <td><%= product.created_at.strftime('%B, %Y') %></td>
+            <td><%= link_to 'Show', product %></td>
+            <td><%= link_to 'Edit', edit_product_path(product) %></td>
+            <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
-
-
-<br>
-
-
-<br>
-<br>
-
-<%= link_to 'New Product', new_product_path %>

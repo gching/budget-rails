@@ -1,37 +1,52 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <p id="notice"><%= notice %></p>
+  <h1><%= @product.name%></h1>
+  <p>
+    <strong>Total Price:</strong>
+    JD<%= @product.price %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+  <p>
+    <strong>Bought on:</strong>
+    <%= @product.created_at.strftime("%D") %>
+  <p>
+    <strong>Who bought it:</strong>
+    <%= @product.owners %>
+  </p>
 
-<p>
-  <strong>Total Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Bought on:</strong>
-  <%= @product.created_at.strftime("%D") %>
-<p>
-  <strong>Owners:</strong>
-  <%= @product.owners %>
-</p>
-
-<p>
-  <strong>Team:</strong>
-  <%= @product.team %>
-</p>
-
-<p>
-  <strong>Who needs to pay:</strong>
-    <% count = @product.pay_list.count %>
-    <% @product.pay_list.each do |payer|%>
-      <p>
-      <%= payer %> : JD<%= @product.price/count %>
-    </p>
+  <p>
+    <strong>Team:</strong>
+    <%if @product.team %>
+      Yes
+    <% else %>
+      No
     <% end %>
-</p>
+  </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+  <p>
+    <strong>Who needs to pay:</strong>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% count = @product.pay_list.count %>
+          <% @product.pay_list.each do |payer|%>
+            <tr>
+              <td><%= payer %></td>
+              <td>JD<%=@product.price/count%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </p>
+
+  <%= link_to 'Edit', edit_product_path(@product), class:"btn btn-primary" %>
+  <%= link_to 'Back', products_path, class: "btn btn-default" %>
+
+
+
+</div>

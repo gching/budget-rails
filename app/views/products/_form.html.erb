@@ -1,13 +1,13 @@
-<%= semantic_form_for @product do |f| %>
+<%= semantic_form_for product do |f| %>
   <%= f.inputs do %>
     <%= f.input :name %>
     <%= f.input :price %>
-    <%= f.input :owners, :as => :radio, :collection => Product::PEOPLE %>
-    <%= f.input :pay_list, :as => :check_boxes, :collection => Product::PEOPLE %>
-    <%= f.input :team, label: "For the team?" %>
+    <%= f.input :owners, :as => :radio, :collection => Product::PEOPLE, label: "Who bought it?" %>
+    <%= f.input :pay_list, :as => :check_boxes, :collection => Product::PEOPLE, label: "Who needs to pay?" %>
+    <%= f.input :team, as: :radio, label: "For the team?" %>
   <% end %>
   <%= f.actions do %>
     <%= f.action :submit, :as => :button %>
-    <%= link_to "Cancel", root_path %>
+    <%= link_to "Cancel", root_path, class:"btn btn-default" %>
   <% end %>
 <% end %>
